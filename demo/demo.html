@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/demo.css">
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+    <title>Insert title here</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+    <script src="../src/js/jquery.messagebox.widget.js"></script>
+</head>
+<body>
+<script>
+function openMessageDialog(type, text) {
+    $.ui.messageBoxWidget({
+        boxType: type,
+        message: text
+    });
+}
+</script>
+<div id="mainMessageBoxContainerId"></div>
+<div class="table" style="border:1px solid lightgrey;width:100%!important;">
+    <div class="trow">
+        <div class="tcell" style="vertical-align:middle;width:50%;border-bottom:1px solid lightgrey;">
+        this is a simple message-box
+        </div>
+        <div class="tcell" style="vertical-align:middle;width:50%;border-bottom:1px solid lightgrey;">
+            <button onClick="openMessageDialog('OK', 'Just a Text');">Try to open</button>
+        </div>
+    </div>
+</div>
+</body>
+</html>

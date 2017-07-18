@@ -1,0 +1,21 @@
+{
+	"name": "jquery-messagebox-widget",
+	"version": "1.0.0",
+	"homepage": "http://piwigon.dnshome.de",
+	"authors": [
+		"Piwi Gon <piwi.gon@osnanet.de>"
+	],
+	"description": "A Plugin having message-boxes for any message.",
+	"main": "src/jquery.messagebox.widget.js",
+	"keywords": [
+		"jquery",
+		"plugin",
+		"widget",
+		"monthselector",
+		"jquery-plugin",
+		"jquery-widget",
+		"jquery-messagebox",
+		"jquery-messagebox-widget"
+	],
+	"license": "MIT"
+}

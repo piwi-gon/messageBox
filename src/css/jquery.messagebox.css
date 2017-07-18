@@ -1,0 +1,25 @@
+@charset "UTF-8";
+
+.messagebox-background {
+    background-color: lightgrey;
+}
+.message-box-content {
+    min-height:250px;
+    max-height:600px;
+    height:auto;
+    line-height:20pt;
+    display:flex;
+    overflow:auto;
+}
+
+.message-box-button-row {
+    height:40px;
+    text-align:center;
+    border:1px solid lightgrey;
+    padding-top:3px;"
+}
+
+.message-box-button {
+    margin-right:10px;
+    margin-left:10px;
+}

@@ -1,0 +1,13 @@
+@CHARSET "UTF-8";
+
+@import url("jquery.messagebox.css");
+
+.table {
+    display:table;
+}
+.trow {
+    display:table-row;
+}
+.tcell {
+    display:table-cell;
+}
