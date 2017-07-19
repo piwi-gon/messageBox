@@ -11,3 +11,17 @@
 .tcell {
     display:table-cell;
 }
+
+.h40 {
+    height: 40px;
+    vertical-align:middle;
+}
+
+.f12b {
+    font-weight: bold;
+    font-size: 12pt;
+}
+
+.f12 {
+    font-size: 12pt;
+}
