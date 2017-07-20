@@ -1,7 +1,8 @@
 
-# jQuery Widget monthSelectorWidget
+# jQuery Widget messagebox
 
-this plugin/widget is used to build a Month-Selector on a given selector
+this widget is used to generate message-boxes with 
+ok, ok|cancel, ok|error, ok|cancel|error, yes|no, yes|no|cancel, yes|no|error, yes|no|cancel|error
 
 ## Usage
 
@@ -14,14 +15,14 @@ this plugin/widget is used to build a Month-Selector on a given selector
 2. Include plugin's code:
 
 	```html
-	<link rel="stylesheet" href="dist/css/monthselector.css">
-	<script src="dist/js/jquery.monthselector.widget.js"></script>
+	<link rel="stylesheet" href="dist/css/jquery.messagebox.css">
+	<script src="dist/js/jquery.messagebox.widget.js"></script>
 	```
 
 3. Call the plugin:
 
 	```javascript
-	$("#element").monthSelectorWidget();
+	$.ui.messageBoxWidget('OK', 'Just the text');
 	```
 
 ## Structure
@@ -30,23 +31,19 @@ The basic structure of the project is given in the following way:
 
 ```
 ├── demo/
-│   ├── index.html
+│   ├── demo.html
 │   ├──css/
 │   │  └──demo.css
-│   ├──images/
-│   │  └──16x16/
-│   │     ├─ arrow_left.png
-│   │     └─ arrow_right.png
 ├── dist/
 │   ├── css/
-│   │  └── monthselector.css
+│   │  └── jquery.messagebox.css
 │   └── js/
-│      └── jquery.monthselector.widget.js
+│      └── jquery.messagebox.widget.js
 ├── src/
 │   ├── css/
-│   │  └── monthselector.css
+│   │  └── jquery.messagebox.css
 │   └── js/
-│      └── jquery.monthselector.widget.js
+│      └── jquery.messagebox.widget.js
 ├── .jshintrc
 ├── Gruntfile.js
 ├── bower.json

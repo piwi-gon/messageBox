@@ -15,8 +15,8 @@
 .message-box-button-row {
     height:40px;
     text-align:center;
-    border:1px solid lightgrey;
-    padding-top:3px;"
+    border: 2px ridge silver;
+    padding-top: 9px;
 }
 
 .message-box-button {

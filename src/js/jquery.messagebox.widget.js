@@ -20,7 +20,7 @@ $.widget("ui.messageBoxWidget", {
             yesFunction: null,
             noFunction: null,
             cancelFunction: null,
-            dialogWidth: 400,
+            dialogWidth: 480,
             dialogHeight: 'auto',
             isModal: true,
             message: '',
@@ -86,7 +86,8 @@ $.widget("ui.messageBoxWidget", {
                     resizeable: false,
                     height: self.intDialogHeight,
                     width:  self.intDialogWidth,
-                    modal: self._isModal
+                    modal: self._isModal,
+                    close: function() { console.log("removing dialog"); $(this).dialog('close').remove() }
                 });
                 $('#messageContentId').html('').html(self.message);
                 $('#'+self.dialogId).siblings(".ui-widget-titlebar").html("Information");
