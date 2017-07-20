@@ -1,6 +1,6 @@
 @CHARSET "UTF-8";
 
-@import url("jquery.messagebox.css");
+@import url("../../dist/css/jquery.messagebox.css");
 
 .table {
     display:table;
@@ -10,4 +10,24 @@
 }
 .tcell {
     display:table-cell;
+}
+
+.h40 {
+    height: 40px;
+    vertical-align:middle;
+}
+
+.f12b {
+    font-family: Arial, Helvetica, Sans-Serif;
+    font-weight: bold;
+    font-size: 12pt;
+}
+
+.f12 {
+    font-family: Arial, Helvetica, Sans-Serif;
+    font-size: 12pt;
+}
+
+.lgrey {
+    background-color:lightgrey;
 }

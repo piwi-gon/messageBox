@@ -19,13 +19,69 @@ function openMessageDialog(type, text) {
 }
 </script>
 <div id="mainMessageBoxContainerId"></div>
-<div class="table" style="border:1px solid lightgrey;width:100%!important;">
+<div class="table" style="border:1px solid lightgrey;width:60%;margin:0 auto;">
     <div class="trow">
-        <div class="tcell" style="vertical-align:middle;width:50%;border-bottom:1px solid lightgrey;">
-        this is a simple message-box
+        <div class="tcell h40 f12b" style="vertical-align:middle;width:50%;border-bottom:1px solid lightgrey;">
+        this is a simple message-box displaying a text
         </div>
-        <div class="tcell" style="vertical-align:middle;width:50%;border-bottom:1px solid lightgrey;">
-            <button onClick="openMessageDialog('OK', 'Just a Text');">Try to open</button>
+        <div class="tcell h40 f12b" style="vertical-align:middle;width:50%;border-bottom:1px solid lightgrey;">
+            <button onClick="openMessageDialog('OK', 'Just a text');">Try to open</button>
+        </div>
+    </div>
+    <div class="trow">
+        <div class="tcell h40 f12b" style="vertical-align:middle;width:50%;border-bottom:1px solid lightgrey;">
+        this is a simple message-box displaying a text (now included a cancel-button)
+        </div>
+        <div class="tcell h40 f12b" style="vertical-align:middle;width:50%;border-bottom:1px solid lightgrey;">
+            <button onClick="openMessageDialog('OK|CANCEL', 'Just a text');">Try to open</button>
+        </div>
+    </div>
+    <div class="trow">
+        <div class="tcell h40 f12b" style="vertical-align:middle;width:50%;border-bottom:1px solid lightgrey;">
+        this is a simple error-message-box displaying an error-text
+        </div>
+        <div class="tcell h40 f12b" style="vertical-align:middle;width:50%;border-bottom:1px solid lightgrey;">
+            <button onClick="openMessageDialog('OK|ERROR', 'Just an error');">Try to open</button>
+        </div>
+    </div>
+    <div class="trow">
+        <div class="tcell h40 f12b" style="vertical-align:middle;width:50%;border-bottom:1px solid lightgrey;">
+        this is a simple error-message-box displaying an error-text (now included a cancel-button)
+        </div>
+        <div class="tcell h40 f12b" style="vertical-align:middle;width:50%;border-bottom:1px solid lightgrey;">
+            <button onClick="openMessageDialog('OK|CANCEL|ERROR', 'Just an error');">Try to open</button>
+        </div>
+    </div>
+    <div class="trow">
+        <div class="tcell h40 f12b" style="vertical-align:middle;width:50%;border-bottom:1px solid lightgrey;">
+        this is a comfirm-message-box displaying a text as question
+        </div>
+        <div class="tcell h40 f12b" style="vertical-align:middle;width:50%;border-bottom:1px solid lightgrey;">
+            <button onClick="openMessageDialog('YES|NO', 'Just a question');">Try to open</button>
+        </div>
+    </div>
+    <div class="trow">
+        <div class="tcell h40 f12b" style="vertical-align:middle;width:50%;border-bottom:1px solid lightgrey;">
+        this is a comfirm-message-box displaying a text as question (now included a cancel-button)
+        </div>
+        <div class="tcell h40 f12b" style="vertical-align:middle;width:50%;border-bottom:1px solid lightgrey;">
+            <button onClick="openMessageDialog('YES|NO|CANCEL', 'Just a question');">Try to open</button>
+        </div>
+    </div>
+    <div class="trow">
+        <div class="tcell h40 f12b" style="vertical-align:middle;width:50%;border-bottom:1px solid lightgrey;">
+        this is a comfirm-message-box displaying a text as error-question
+        </div>
+        <div class="tcell h40 f12b" style="vertical-align:middle;width:50%;border-bottom:1px solid lightgrey;">
+            <button onClick="openMessageDialog('YES|NO|ERROR', 'Just a error-question');">Try to open</button>
+        </div>
+    </div>
+    <div class="trow">
+        <div class="tcell h40 f12b" style="vertical-align:middle;width:50%;border-bottom:1px solid lightgrey;">
+        this is a comfirm-message-box displaying a text as error-question (now included a cancel-button)
+        </div>
+        <div class="tcell h40 f12b" style="vertical-align:middle;width:50%;border-bottom:1px solid lightgrey;">
+            <button onClick="openMessageDialog('YES|NO|CANCEL|ERROR', 'Just an error-question');">Try to open</button>
         </div>
     </div>
 </div>

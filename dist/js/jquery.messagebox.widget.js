@@ -20,98 +20,132 @@ $.widget("ui.messageBoxWidget", {
             yesFunction: null,
             noFunction: null,
             cancelFunction: null,
+            dialogWidth: 480,
+            dialogHeight: 'auto',
+            isModal: true,
+            message: '',
             },
     boxtypes: ["OK",
               "OK|CANCEL",
               "YES|NO",
               "YES|NO|CANCEL"],
-    boxType: null,
-    dialogWidth: 400,
-    dialogHeight: 'auto',
     dialogId: '',
+    fileName: '',
+    message: 'No Message given',
+    intDialogHeight: null,
+    intDialogWidth: null,
+    _isModal: true,
+    _boxType:'',
+    elemToAddTo:"",
 
     _create: function() {
-        
+        console.log("TEST (create)");
+        this.element.hide();
+        this.elemToAddTo = this.element.parent();
+        this.intDialogHeight = this.options.dialogHeight;
+        this.intDialogWidth  = this.options.dialogWidth;
+        this._isModal = this.options.isModal;
+        this._boxType = this.options.boxType.replace("|ERROR", "");
+        this.message = this.options.message;
     },
 
     _init: function() {
-        var loc = window.location.pathname;
-        var dir = loc.substring(0, loc.lastIndexOf('/'));
-        this.currentDir = dir;
-        if(this.boxType == "OK") {
+        console.log("TESTT (init)");
+        this.currentDir = $("script[src]").last().attr("src").split('?')[0].split('/').slice(0, -1).join('/')+'/';
+        if(this._boxType == "OK") {
             this.dialogId = "dialog-ok";
-            _ok();
+            this.fileName = "ok.html";
         }
-        if(this.boxType == "OK|CANCEL") {
+        if(this._boxType == "OK|CANCEL") {
             this.dialogId = "dialog-okcancel";
-            _okcancel();
+            this.fileName = "okcancel.html";
         }
-        if(this.boxType == "YES|NO") {
-            this.dialogId = "dialog-yesnok";
-            _yesno();
+        if(this._boxType == "YES|NO") {
+            this.dialogId = "dialog-yesno";
+            this.fileName = "yesno.html";
         }
-        if(this.boxType == "YES|NO|CANCEL") {
+        if(this._boxType == "YES|NO|CANCEL") {
             this.dialogId = "dialog-yesnocancel";
-            _yesnocancel();
+            this.fileName = "yesnocancel.html";
         }
+        this._createDialog();
     },
 
-    _yesno: function() {
+    _createDialog: function() {
+        var self = this;
         var htmlData = null;
+        if(this._isModal == undefined) { this._isModal = true; }
         $.ajax({
-            url: this.currentDir + "/" + "yesno.html",
+            url: this.currentDir + this.fileName,
             type: 'POST',
             success : function(data) {
                 htmlData = data;
-                $('#'+this.dialogId).dialog({
+                $('body').append(htmlData);
+                $('#'+self.dialogId).dialog({
                     autoOpen: false,
                     resizeable: false,
-                    height: dialogHeight,
-                    width: dialogHeight,
-                    modal: _isModal
+                    height: self.intDialogHeight,
+                    width:  self.intDialogWidth,
+                    modal: self._isModal,
+                    close: function() { console.log("removing dialog"); $(this).dialog('close').remove() }
                 });
-                $('#messageContentId').html('').html(text);
-                $('#'+this.boxType).siblings("ui-widget-titlebar").htm("Information");
-                this._checkButtons();
-                $('#'+this.boxType).dialog('open');
+                $('#messageContentId').html('').html(self.message);
+                $('#'+self.dialogId).siblings(".ui-widget-titlebar").html("Information");
+                console.log("BOXTYPE: " + self.options.boxType);
+                if(self.options.boxType.indexOf("ERROR")>-1) {
+                    console.log("replacing");
+                    $('.ui-state-default').addClass('ui-state-error').removeClass('ui-state-default');
+                }
+                self._checkButtons(self);
+                self._openDialog(self);
             }
         });
     },
 
-    _checkButtons: function() {
-        if(this.boxType.indexOf("OK")>-1) {
-            if($('#'+dialogId+'okButtonId').length > 0) {
-                if(this.options.okFunction != null && typeof this.options.okFunction == "function") {
-                    $('#'+dialogId+'OKButtonId').click(this.options.okFunction);
+    _openDialog: function(self) {
+        console.log('Dialog "' + self.dialogId + '"'); 
+        if($('#'+self.dialogId).length > 0) {
+            console.log('opening ...');
+            $('#'+self.dialogId).dialog('open');
+        }
+    },
+
+    _checkButtons: function(self) {
+        if(self._boxType.indexOf("OK")>-1) {
+            console.log("In OK");
+            if($('#'+self.dialogId+'OKButtonId').length > 0) {
+                console.log("Its greater tan 0");
+                if(self.options.okFunction != null && typeof self.options.okFunction == "function") {
+                    $('#'+self.dialogId+'OKButtonId').click(function() { console.log("buttonOK"); self.options.okFunction; });
                 } else {
-                    $('#'+method+'OKButtonId').click(function() {$('#'+method).dialog('close').remove();});
+                    $('#'+self.dialogId+'OKButtonId').click(function() { console.log("buttonOK"); $('#'+self.dialogId).dialog('close').remove(); });
                 }
             }
         }
-        if(this.boxType.indexOf("CANCEL")>-1) {
-            if($('#'+dialogId+'cancelButtonId').length > 0) {
-                if(this.options.cancelFunction != null && typeof this.options.cancelFunction == "function") {
-                    $('#'+dialogId+'CancelButtonId').click(this.options.cancelFunction);
+        if(this._boxType.indexOf("CANCEL")>-1) {
+            if($('#'+self.dialogId+'CancelButtonId').length > 0) {
+                if(self.options.cancelFunction != null && typeof self.options.cancelFunction == "function") {
+                    $('#'+self.dialogId+'CancelButtonId').click(function () { console.log("buttonCANCEL"); self.options.cancelFunction; });
                 } else {
-                    $('#'+dialogId+'CancelButtonId').click(function() {$('#'+method).dialog('close').remove();});
+                    $('#'+self.dialogId+'CancelButtonId').click(function() { console.log("buttonCANCEL"); $('#'+self.dialogId).dialog('close').remove(); });
                 }
             }
         }
-        if(this.boxType.indexOf("YES")>-1) {
-            if($('#'+dialogId+'yesButtonId').length > 0) {
-                if(this.options.yesFunction != null && typeof this.options.yesFunction == "function") {
-                    $('#'+dialogId+'YesButtonId').click(this.options.yesFunction);
+        if(this._boxType.indexOf("YES")>-1) {
+            if($('#'+self.dialogId+'YesButtonId').length > 0) {
+                if(self.options.yesFunction != null && typeof self.options.yesFunction == "function") {
+                    $('#'+self.dialogId+'YesButtonId').click(function() { console.log("buttonYES"); self.options.yesFunction; });
                 } else {
-                    $('#'+dialogId+'YesButtonId').click(function() {$('#'+method).dialog('close').remove();});
+                    $('#'+self.dialogId+'YesButtonId').click(function() { console.log("buttonYES"); $('#'+self.dialogId).dialog('close').remove(); });
                 }
             }
         }
-        if(this.boxType.indexOf("NO")>-1) {
-            if($('#'+dialogId+'noButtonId').length > 0) {
-                if(this.options.noFunction != null && typeof this.options.noFunction == "function") {
-                    $('#'+dialogId+'NoButtonId').click(this.options.noFunction);
+        if(this._boxType.indexOf("NO")>-1) {
+            if($('#'+self.dialogId+'NoButtonId').length > 0) {
+                if(self.options.noFunction != null && typeof self.options.noFunction == "function") {
+                    $('#'+self.dialogId+'NoButtonId').click(function() { console.log("buttonNO");  self.options.noFunction; });
                 } else {
-                    $('#'+dialogId+'NoButtonId').click(function() {$('#'+method).dialog('close').remove();});
+                    $('#'+self.dialogId+'NoButtonId').click(function() { console.log("buttonNO"); $('#'+self.dialogId).dialog('close').remove(); });
                 }
             }
         }
