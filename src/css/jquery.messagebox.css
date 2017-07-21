@@ -17,9 +17,14 @@
     text-align:center;
     border: 2px ridge silver;
     padding-top: 9px;
+    background-color: white;
 }
 
 .message-box-button {
     margin-right:10px;
     margin-left:10px;
+}
+
+.message-box-blgrey {
+    background-color: lightgrey;
 }
