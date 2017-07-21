@@ -68,6 +68,7 @@ $.widget("ui.messageBoxWidget", {
             this.dialogId = "dialog-yesnocancel";
             this.fileName = "yesnocancel.html";
         }
+        console.log(this.options);
         this._createDialog();
     },
 
@@ -87,6 +88,9 @@ $.widget("ui.messageBoxWidget", {
                     height: self.intDialogHeight,
                     width:  self.intDialogWidth,
                     modal: self._isModal,
+                    open: function(event) {
+                        $(event.target).parent().css( { backgroundColor: 'lightgrey'})
+                    },
                     close: function() { console.log("removing dialog"); $(this).dialog('close').remove() }
                 });
                 $('#messageContentId').html('').html(self.message);
@@ -116,7 +120,7 @@ $.widget("ui.messageBoxWidget", {
             if($('#'+self.dialogId+'OKButtonId').length > 0) {
                 console.log("Its greater tan 0");
                 if(self.options.okFunction != null && typeof self.options.okFunction == "function") {
-                    $('#'+self.dialogId+'OKButtonId').click(function() { console.log("buttonOK"); self.options.okFunction; });
+                    $('#'+self.dialogId+'OKButtonId').click(function() { console.log("buttonOK"); self.options.okFunction.call(); $('#'+self.dialogId).dialog('close').remove(); });
                 } else {
                     $('#'+self.dialogId+'OKButtonId').click(function() { console.log("buttonOK"); $('#'+self.dialogId).dialog('close').remove(); });
                 }
@@ -125,7 +129,7 @@ $.widget("ui.messageBoxWidget", {
         if(this._boxType.indexOf("CANCEL")>-1) {
             if($('#'+self.dialogId+'CancelButtonId').length > 0) {
                 if(self.options.cancelFunction != null && typeof self.options.cancelFunction == "function") {
-                    $('#'+self.dialogId+'CancelButtonId').click(function () { console.log("buttonCANCEL"); self.options.cancelFunction; });
+                    $('#'+self.dialogId+'CancelButtonId').click(function () { console.log("buttonCANCEL"); self.options.cancelFunction.call(); $('#'+self.dialogId).dialog('close').remove(); });
                 } else {
                     $('#'+self.dialogId+'CancelButtonId').click(function() { console.log("buttonCANCEL"); $('#'+self.dialogId).dialog('close').remove(); });
                 }
@@ -134,7 +138,7 @@ $.widget("ui.messageBoxWidget", {
         if(this._boxType.indexOf("YES")>-1) {
             if($('#'+self.dialogId+'YesButtonId').length > 0) {
                 if(self.options.yesFunction != null && typeof self.options.yesFunction == "function") {
-                    $('#'+self.dialogId+'YesButtonId').click(function() { console.log("buttonYES"); self.options.yesFunction; });
+                    $('#'+self.dialogId+'YesButtonId').click(function() { console.log("buttonYES"); self.options.yesFunction.call(); $('#'+self.dialogId).dialog('close').remove(); });
                 } else {
                     $('#'+self.dialogId+'YesButtonId').click(function() { console.log("buttonYES"); $('#'+self.dialogId).dialog('close').remove(); });
                 }
@@ -143,7 +147,7 @@ $.widget("ui.messageBoxWidget", {
         if(this._boxType.indexOf("NO")>-1) {
             if($('#'+self.dialogId+'NoButtonId').length > 0) {
                 if(self.options.noFunction != null && typeof self.options.noFunction == "function") {
-                    $('#'+self.dialogId+'NoButtonId').click(function() { console.log("buttonNO");  self.options.noFunction; });
+                    $('#'+self.dialogId+'NoButtonId').click(function() { console.log("buttonNO");  self.options.noFunction.call(); $('#'+self.dialogId).dialog('close').remove(); });
                 } else {
                     $('#'+self.dialogId+'NoButtonId').click(function() { console.log("buttonNO"); $('#'+self.dialogId).dialog('close').remove(); });
                 }

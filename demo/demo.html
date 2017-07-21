@@ -3,29 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="css/demo.css">
-    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
     <title>Insert title here</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script src="../src/js/jquery.messagebox.widget.js"></script>
 </head>
 <body>
 <script>
-function openMessageDialog(type, text) {
+function openMessageDialog(type, text, okFunction, cancelFunction) {
     $.ui.messageBoxWidget({
         boxType: type,
-        message: text
+        message: text,
+        okFunction: okFunction || null,
+        cancelFunction: cancelFunction || null
+    });
+}
+
+function openConfirmDialog(type, text, yesFunction, noFunction, cancelFunction) {
+    $.ui.messageBoxWidget({
+        boxType: type,
+        message: text,
+        yesFunction: yesFunction||null,
+        noFunction: noFunction||null,
+        cancelFunction: cancelFunction || null
     });
 }
 </script>
 <div id="mainMessageBoxContainerId"></div>
+<h2 align="center">JQuery-UI-Widget MessageBox - Examples</h2>
 <div class="table" style="border:1px solid lightgrey;width:60%;margin:0 auto;">
     <div class="trow">
         <div class="tcell h40 f12b" style="vertical-align:middle;width:50%;border-bottom:1px solid lightgrey;">
         this is a simple message-box displaying a text
         </div>
         <div class="tcell h40 f12b" style="vertical-align:middle;width:50%;border-bottom:1px solid lightgrey;">
-            <button onClick="openMessageDialog('OK', 'Just a text');">Try to open</button>
+            <button onClick="openMessageDialog('OK', 'Just a text', function() {alert('You hit OK'); });">Show</button>
         </div>
     </div>
     <div class="trow">
@@ -33,7 +46,7 @@ function openMessageDialog(type, text) {
         this is a simple message-box displaying a text (now included a cancel-button)
         </div>
         <div class="tcell h40 f12b" style="vertical-align:middle;width:50%;border-bottom:1px solid lightgrey;">
-            <button onClick="openMessageDialog('OK|CANCEL', 'Just a text');">Try to open</button>
+            <button onClick="openMessageDialog('OK|CANCEL', 'Just a text', function() {alert('You hit OK'); }, function() {alert('You hit CANCEL'); });">Show</button>
         </div>
     </div>
     <div class="trow">
@@ -41,7 +54,7 @@ function openMessageDialog(type, text) {
         this is a simple error-message-box displaying an error-text
         </div>
         <div class="tcell h40 f12b" style="vertical-align:middle;width:50%;border-bottom:1px solid lightgrey;">
-            <button onClick="openMessageDialog('OK|ERROR', 'Just an error');">Try to open</button>
+            <button onClick="openMessageDialog('OK|ERROR', 'Just an error', function() {alert('You hit OK'); });">Show</button>
         </div>
     </div>
     <div class="trow">
@@ -49,7 +62,7 @@ function openMessageDialog(type, text) {
         this is a simple error-message-box displaying an error-text (now included a cancel-button)
         </div>
         <div class="tcell h40 f12b" style="vertical-align:middle;width:50%;border-bottom:1px solid lightgrey;">
-            <button onClick="openMessageDialog('OK|CANCEL|ERROR', 'Just an error');">Try to open</button>
+            <button onClick="openMessageDialog('OK|CANCEL|ERROR', 'Just an error', function() {alert('You hit OK'); }, function() {alert('You hit CANCEL'); });">Show</button>
         </div>
     </div>
     <div class="trow">
@@ -57,7 +70,7 @@ function openMessageDialog(type, text) {
         this is a comfirm-message-box displaying a text as question
         </div>
         <div class="tcell h40 f12b" style="vertical-align:middle;width:50%;border-bottom:1px solid lightgrey;">
-            <button onClick="openMessageDialog('YES|NO', 'Just a question');">Try to open</button>
+            <button onClick="openConfirmDialog('YES|NO', 'Just a question', function() {alert('You hit YES'); }, function() {alert('You hit NO'); });">Show</button>
         </div>
     </div>
     <div class="trow">
@@ -65,7 +78,7 @@ function openMessageDialog(type, text) {
         this is a comfirm-message-box displaying a text as question (now included a cancel-button)
         </div>
         <div class="tcell h40 f12b" style="vertical-align:middle;width:50%;border-bottom:1px solid lightgrey;">
-            <button onClick="openMessageDialog('YES|NO|CANCEL', 'Just a question');">Try to open</button>
+            <button onClick="openConfirmDialog('YES|NO|CANCEL', 'Just a question', function() {alert('You hit YES'); }, function() {alert('You hit NO'); }, function() {alert('You hit CANCEL'); });">Show</button>
         </div>
     </div>
     <div class="trow">
@@ -73,7 +86,7 @@ function openMessageDialog(type, text) {
         this is a comfirm-message-box displaying a text as error-question
         </div>
         <div class="tcell h40 f12b" style="vertical-align:middle;width:50%;border-bottom:1px solid lightgrey;">
-            <button onClick="openMessageDialog('YES|NO|ERROR', 'Just a error-question');">Try to open</button>
+            <button onClick="openConfirmDialog('YES|NO|ERROR', 'Just a error-question', function() {alert('You hit YES'); }, function() {alert('You hit NO'); });">Show</button>
         </div>
     </div>
     <div class="trow">
@@ -81,7 +94,7 @@ function openMessageDialog(type, text) {
         this is a comfirm-message-box displaying a text as error-question (now included a cancel-button)
         </div>
         <div class="tcell h40 f12b" style="vertical-align:middle;width:50%;border-bottom:1px solid lightgrey;">
-            <button onClick="openMessageDialog('YES|NO|CANCEL|ERROR', 'Just an error-question');">Try to open</button>
+            <button onClick="openConfirmDialog('YES|NO|CANCEL|ERROR', 'Just an error-question', function() {alert('You hit YES'); }, function() {alert('You hit NO'); }, function() {alert('You hit CANCEL'); });">Show</button>
         </div>
     </div>
 </div>
