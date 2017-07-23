@@ -4,7 +4,8 @@
     background-color: lightgrey;
 }
 .message-box-content {
-    min-height:250px;
+    border: 2px ridge silver;
+    min-height:150px;
     max-height:600px;
     height:auto;
     line-height:20pt;

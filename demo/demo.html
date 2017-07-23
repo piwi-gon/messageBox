@@ -20,6 +20,18 @@ function openMessageDialog(type, text, okFunction, cancelFunction) {
     });
 }
 
+function openMessageDialogALT(type, text, okFunction, cancelFunction) {
+    $.ui.messageBoxWidget({
+        boxType: type,
+        message: text,
+        okFunction: okFunction || null,
+        cancelFunction: cancelFunction || null,
+        dialogHeight: 'auto',
+        dialogWidth: 600,
+        titleBar: false,
+    });
+}
+
 function openConfirmDialog(type, text, yesFunction, noFunction, cancelFunction) {
     $.ui.messageBoxWidget({
         boxType: type,
@@ -39,6 +51,7 @@ function openConfirmDialog(type, text, yesFunction, noFunction, cancelFunction) 
         </div>
         <div class="tcell h40 f12b" style="vertical-align:middle;width:50%;border-bottom:1px solid lightgrey;">
             <button onClick="openMessageDialog('OK', 'Just a text', function() {alert('You hit OK'); });">Show</button>
+            <button onClick="openMessageDialogALT('OK', 'Just a text', function() {alert('You hit OK'); });">Show (alt)</button>
         </div>
     </div>
     <div class="trow">
