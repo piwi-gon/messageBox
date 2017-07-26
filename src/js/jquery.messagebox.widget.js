@@ -25,7 +25,11 @@ $.widget("ui.messageBoxWidget", {
             isModal: true,
             message: '',
             titleBar: true,
-            titleText: 'Information'
+            titleText: 'Information',
+            buttonTextYes: 'Ja',
+            buttonTextNo: 'Nein',
+            buttonTextCancel: 'Abbrechen',
+            buttonTextOK: 'Ok',
             },
     boxtypes: ["OK",
               "OK|CANCEL",
@@ -122,6 +126,7 @@ $.widget("ui.messageBoxWidget", {
         if(self._boxType.indexOf("OK")>-1) {
             console.log("In OK");
             if($('#'+self.dialogId+'OKButtonId').length > 0) {
+                $('#'+self.dialogId+'OKButtonId').html(self.options.buttonTextOK);
                 if(self.options.okFunction != null && typeof self.options.okFunction == "function") {
                     $('#'+self.dialogId+'OKButtonId').click(function() { self.options.okFunction.call(); $('#'+self.dialogId).dialog('close').remove(); });
                 } else {
@@ -131,6 +136,7 @@ $.widget("ui.messageBoxWidget", {
         }
         if(this._boxType.indexOf("CANCEL")>-1) {
             if($('#'+self.dialogId+'CancelButtonId').length > 0) {
+                $('#'+self.dialogId+'CancelButtonId').html(self.options.buttonTextCancel);
                 if(self.options.cancelFunction != null && typeof self.options.cancelFunction == "function") {
                     $('#'+self.dialogId+'CancelButtonId').click(function() { self.options.cancelFunction.call(); $('#'+self.dialogId).dialog('close').remove(); });
                 } else {
@@ -140,6 +146,7 @@ $.widget("ui.messageBoxWidget", {
         }
         if(this._boxType.indexOf("YES")>-1) {
             if($('#'+self.dialogId+'YesButtonId').length > 0) {
+                $('#'+self.dialogId+'YesButtonId').html(self.options.buttonTextYes);
                 if(self.options.yesFunction != null && typeof self.options.yesFunction == "function") {
                     $('#'+self.dialogId+'YesButtonId').click(function() { self.options.yesFunction.call(); $('#'+self.dialogId).dialog('close').remove(); });
                 } else {
@@ -149,6 +156,7 @@ $.widget("ui.messageBoxWidget", {
         }
         if(this._boxType.indexOf("NO")>-1) {
             if($('#'+self.dialogId+'NoButtonId').length > 0) {
+                $('#'+self.dialogId+'NoButtonId').html(self.options.buttonTextNo);
                 if(self.options.noFunction != null && typeof self.options.noFunction == "function") {
                     $('#'+self.dialogId+'NoButtonId').click(function() { self.options.noFunction.call(); $('#'+self.dialogId).dialog('close').remove(); });
                 } else {

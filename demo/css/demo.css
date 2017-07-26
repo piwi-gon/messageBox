@@ -31,3 +31,33 @@
 .lgrey {
     background-color:lightgrey;
 }
+
+.defaultButton {
+    border-top:1px solid lightgrey;
+    border-left:1px solid lightgrey;
+    border-bottom:1px solid grey;
+    border-right:1px solid grey;
+    border-radius: 4px;
+    background-color:#ddd;
+    background: linear-gradient(#eee, #ddd);
+    padding-left: 8px;
+    padding-right: 8px;
+    margin-left: 17px;
+    margin-right: 17px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    padding-top: 0;
+    padding-bottom: 0;
+    width:120px;
+    height: 40px;
+}
+.defaultButton:active, .defaultButton:focus {
+    background: linear-gradient(#ddd, #ddd);
+    border-top:1px solid lightgrey;
+    border-left:1px solid lightgrey;
+    border-bottom:1px solid lightgreygrey;
+    border-right:1px solid lightgreygrey;
+}
+.defaultButton:hover {
+    background: linear-gradient(#fefefe, #eee);
+}
