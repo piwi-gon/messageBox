@@ -6,7 +6,23 @@
  * created: 17.07.2017
  * changed: 17.07.2017
  *
- * purpose:
+ * useable options:
+ *          boxType         : declares the Box-Type                 -   default: "OK",
+ *          okFunction      : declares the okFunction               -   default: null,
+ *          yesFunction     : declares the yesFunction              -   default: null,
+ *          noFunction      : declares the noFunct6ion              -   default: null,
+ *          cancelFunction  : declares the cancelFunction           -   default: null,
+ *          dialogWidth     : declares the dialogWidth              -   default: 480,
+ *          dialogHeight    : declares the dialogHeight             -   default: 'auto',
+ *          isModal         : declares if dialog is modal           -   default: true,
+ *          showIcon        : declares to show the msg-icon         -   default: true,
+ *          message         : this is the message to be displayed   -   default: 'none',
+ *          titleBar        : declares to show the titlebar or not  -   default: true,
+ *          titleText       : declares the title-text               -   default: 'Information',
+ *          buttonTextYes   : declares the text for button yes      -   default: 'Ja',
+ *          buttonTextNo    : declares the text for button no       -   default: 'Nein',
+ *          buttonTextCancel: declares the text for button cancel   -   default: 'Abbrechen',
+ *          buttonTextOK    : declares the text for button ok       -   default: 'Ok',
  *
  */
 
@@ -14,7 +30,6 @@ $.widget("ui.messageBoxWidget", {
     version: "1.0.0",
     currentDir: '',
     options: {
-            onChange: function() {},
             boxType: "OK",
             okFunction: null,
             yesFunction: null,
@@ -23,9 +38,14 @@ $.widget("ui.messageBoxWidget", {
             dialogWidth: 480,
             dialogHeight: 'auto',
             isModal: true,
+            showIcon: true,
             message: '',
             titleBar: true,
-            titleText: 'Information'
+            titleText: 'Information',
+            buttonTextYes: 'Ja',
+            buttonTextNo: 'Nein',
+            buttonTextCancel: 'Abbrechen',
+            buttonTextOK: 'Ok',
             },
     boxtypes: ["OK",
               "OK|CANCEL",
@@ -104,6 +124,10 @@ $.widget("ui.messageBoxWidget", {
                     $('#'+self.dialogId).siblings(".ui-dialog-titlebar").remove();
                     $('#'+self.dialogId).siblings(".ui-dialog-content").css('padding-top', '10px');
                 }
+                if(!self.options.showIcon) {
+                    console.log("removing icon-row");
+                    $('#messageIconId').parent().remove();
+                }
                 self._checkButtons(self);
                 self._openDialog(self);
             }
@@ -122,6 +146,7 @@ $.widget("ui.messageBoxWidget", {
         if(self._boxType.indexOf("OK")>-1) {
             console.log("In OK");
             if($('#'+self.dialogId+'OKButtonId').length > 0) {
+                $('#'+self.dialogId+'OKButtonId').html(self.options.buttonTextOK);
                 if(self.options.okFunction != null && typeof self.options.okFunction == "function") {
                     $('#'+self.dialogId+'OKButtonId').click(function() { self.options.okFunction.call(); $('#'+self.dialogId).dialog('close').remove(); });
                 } else {
@@ -131,6 +156,7 @@ $.widget("ui.messageBoxWidget", {
         }
         if(this._boxType.indexOf("CANCEL")>-1) {
             if($('#'+self.dialogId+'CancelButtonId').length > 0) {
+                $('#'+self.dialogId+'CancelButtonId').html(self.options.buttonTextCancel);
                 if(self.options.cancelFunction != null && typeof self.options.cancelFunction == "function") {
                     $('#'+self.dialogId+'CancelButtonId').click(function() { self.options.cancelFunction.call(); $('#'+self.dialogId).dialog('close').remove(); });
                 } else {
@@ -140,6 +166,7 @@ $.widget("ui.messageBoxWidget", {
         }
         if(this._boxType.indexOf("YES")>-1) {
             if($('#'+self.dialogId+'YesButtonId').length > 0) {
+                $('#'+self.dialogId+'YesButtonId').html(self.options.buttonTextYes);
                 if(self.options.yesFunction != null && typeof self.options.yesFunction == "function") {
                     $('#'+self.dialogId+'YesButtonId').click(function() { self.options.yesFunction.call(); $('#'+self.dialogId).dialog('close').remove(); });
                 } else {
@@ -149,6 +176,7 @@ $.widget("ui.messageBoxWidget", {
         }
         if(this._boxType.indexOf("NO")>-1) {
             if($('#'+self.dialogId+'NoButtonId').length > 0) {
+                $('#'+self.dialogId+'NoButtonId').html(self.options.buttonTextNo);
                 if(self.options.noFunction != null && typeof self.options.noFunction == "function") {
                     $('#'+self.dialogId+'NoButtonId').click(function() { self.options.noFunction.call(); $('#'+self.dialogId).dialog('close').remove(); });
                 } else {
