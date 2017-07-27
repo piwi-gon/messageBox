@@ -6,7 +6,23 @@
  * created: 17.07.2017
  * changed: 17.07.2017
  *
- * purpose:
+ * useable options:
+ *          boxType         : declares the Box-Type                 -   default: "OK",
+ *          okFunction      : declares the okFunction               -   default: null,
+ *          yesFunction     : declares the yesFunction              -   default: null,
+ *          noFunction      : declares the noFunct6ion              -   default: null,
+ *          cancelFunction  : declares the cancelFunction           -   default: null,
+ *          dialogWidth     : declares the dialogWidth              -   default: 480,
+ *          dialogHeight    : declares the dialogHeight             -   default: 'auto',
+ *          isModal         : declares if dialog is modal           -   default: true,
+ *          showIcon        : declares to show the msg-icon         -   default: true,
+ *          message         : this is the message to be displayed   -   default: 'none',
+ *          titleBar        : declares to show the titlebar or not  -   default: true,
+ *          titleText       : declares the title-text               -   default: 'Information',
+ *          buttonTextYes   : declares the text for button yes      -   default: 'Ja',
+ *          buttonTextNo    : declares the text for button no       -   default: 'Nein',
+ *          buttonTextCancel: declares the text for button cancel   -   default: 'Abbrechen',
+ *          buttonTextOK    : declares the text for button ok       -   default: 'Ok',
  *
  */
 
@@ -14,7 +30,6 @@ $.widget("ui.messageBoxWidget", {
     version: "1.0.0",
     currentDir: '',
     options: {
-            onChange: function() {},
             boxType: "OK",
             okFunction: null,
             yesFunction: null,
@@ -23,6 +38,7 @@ $.widget("ui.messageBoxWidget", {
             dialogWidth: 480,
             dialogHeight: 'auto',
             isModal: true,
+            showIcon: true,
             message: '',
             titleBar: true,
             titleText: 'Information',
@@ -107,6 +123,10 @@ $.widget("ui.messageBoxWidget", {
                 if(!self.options.titleBar) {
                     $('#'+self.dialogId).siblings(".ui-dialog-titlebar").remove();
                     $('#'+self.dialogId).siblings(".ui-dialog-content").css('padding-top', '10px');
+                }
+                if(!self.options.showIcon) {
+                    console.log("removing icon-row");
+                    $('#messageIconId').parent().remove();
                 }
                 self._checkButtons(self);
                 self._openDialog(self);

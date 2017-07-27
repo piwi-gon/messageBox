@@ -1,7 +1,5 @@
 @CHARSET "UTF-8";
 
-@import url("../../dist/css/jquery.messagebox.css");
-
 .table {
     display:table;
 }
