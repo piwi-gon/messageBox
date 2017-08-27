@@ -35,7 +35,7 @@ $.widget("ui.messageBoxWidget", {
             yesFunction: null,
             noFunction: null,
             cancelFunction: null,
-            dialogWidth: 480,
+            dialogWidth: 500,
             dialogHeight: 'auto',
             isModal: true,
             showIcon: true,
@@ -72,7 +72,9 @@ $.widget("ui.messageBoxWidget", {
 
     _init: function() {
         console.log("TESTT (init)");
-        this.currentDir = $("script[src]").last().attr("src").split('?')[0].split('/').slice(0, -1).join('/')+'/';
+        var dir = document.querySelector('script[src$="jquery.messagebox.widget.js"]').getAttribute('src');
+        var name = dir.split('/').pop(); 
+        this.currentDir = dir.replace('/'+name,"/mbMasks/");
         if(this._boxType == "OK") {
             this.dialogId = "dialog-ok";
             this.fileName = "ok.html";
@@ -186,3 +188,23 @@ $.widget("ui.messageBoxWidget", {
         }
     }
 });
+
+/**
+ * to activate a replacement for alert try the following code
+ *
+ */
+
+(function(alert) {
+    window.alert= function() {
+        openMessageBoxDialog.apply(this, arguments);
+    }
+})(window.alert);
+
+function openMessageBoxDialog(text, type, okFunction, cancelFunction) {
+    $.ui.messageBoxWidget({
+        boxType: type,
+        message: text,
+        okFunction: okFunction || null,
+        cancelFunction: cancelFunction || null
+    });
+}
