@@ -119,7 +119,7 @@ $.widget("ui.messageBoxWidget", {
                 $('#messageContentId').html('').html(self.message);
                 $('#'+self.dialogId).siblings(".ui-dialog-titlebar").html(self.options.titleText);
                 if(self.options.boxType.indexOf("ERROR")>-1) {
-                    $('.ui-state-default').addClass('ui-state-error').removeClass('ui-state-default');
+                    $('#'+self.dialogId+' .ui-state-default').addClass('ui-state-error').removeClass('ui-state-default');
                     $('#messageIconId img').attr("src", 'images/fa-exclamation.png');
                 }
                 if(!self.options.titleBar) {
